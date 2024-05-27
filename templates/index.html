@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Activity Tracker</a>
+    </nav>
+    <div class="container">
+        <h1 class="text-center mt-5 animate__animated animate__fadeInDown">Activity Tracker</h1>
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="date">Select Date:</label>
+                        <input type="date" id="date" name="date" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+        {% if result %}
+            <div class="result">
+                {% if result.error %}
+                    <div class="alert alert-danger mt-4 animate__animated animate__shakeX" role="alert">
+                        {{ result.error }}
+                    </div>
+                {% else %}
+                    <div class="card mt-4 animate__animated animate__fadeInUp">
+                        <div class="card-body">
+                            <h2 class="card-title">Results for {{ result.date }}</h2>
+                            <p><strong>Inside Duration:</strong> {{ result.inside_duration }}</p>
+                            <p><strong>Outside Duration:</strong> {{ result.outside_duration }}</p>
+                            <p><strong>Number of Picking Activities:</strong> {{ result.picking }}</p>
+                            <p><strong>Number of Placing Activities:</strong> {{ result.placing }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Activity Tracker. All rights reserved.</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
